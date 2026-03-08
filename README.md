@@ -1,6 +1,6 @@
 # 🚀 VULCAN_ENGINE v4 | High-Frequency Data Monitoring
 
-[Live Demo Link](REPLACE_WITH_YOUR_VERCEL_URL) | [Source Code](REPLACE_WITH_YOUR_GITHUB_URL)
+[Live Demo Link](https://vercel.com/garimamdev23s-projects/high-perf-monitoring-dashboard-garima) | [Source Code](https://github.com/garimamdev23/high-perf-monitoring-dashboard)
 
 ## 📋 Project Overview
 A performance-optimized monitoring dashboard built to handle high-density data streams (40Hz+) without UI jank. This project serves as a technical case study on **Main Thread Optimization** and **Memory Management** in modern frontend architectures.
