@@ -1,73 +1,31 @@
-# React + TypeScript + Vite
+# 🚀 VULCAN_ENGINE v4 | High-Frequency Data Monitoring
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Demo Link](REPLACE_WITH_YOUR_VERCEL_URL) | [Source Code](REPLACE_WITH_YOUR_GITHUB_URL)
 
-Currently, two official plugins are available:
+## 📋 Project Overview
+A performance-optimized monitoring dashboard built to handle high-density data streams (40Hz+) without UI jank. This project serves as a technical case study on **Main Thread Optimization** and **Memory Management** in modern frontend architectures.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Engineering Solutions
 
-## React Compiler
+### 1. Throttled Buffer Strategy (The "Pressure Valve")
+* **The Problem:** React state updates at 40Hz+ saturate the Event Loop, causing "jank."
+* **The Solution:** I implemented a decoupling layer. Incoming data is collected in a non-reactive `useRef` buffer and "flushed" to the global **Zustand** store at a sustainable 10Hz. This ensures the UI remains at a consistent 60FPS.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 2. Memory Leak Prevention
+* **The Problem:** Continuous data streams can lead to infinite array growth and browser crashes.
+* **The Solution:** Utilized **Rolling Window Logic** (`.slice(-60)`) to ensure the data array maintains a constant size, providing a predictable memory footprint for long-running sessions.
 
-## Expanding the ESLint configuration
+### 3. Visual Anomaly Detection
+* **The Challenge:** High data volume makes it hard to spot critical spikes manually.
+* **The Solution:** Integrated heuristic analysis that triggers **Visual Regressions** (red color shifts and pulse animations) when values exceed an 80% threshold.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
+- **Framework:** React 18 + TypeScript (Strict Mode)
+- **State:** Zustand (Granular re-renders)
+- **Styling:** Tailwind CSS v4 (Engine-first CSS)
+- **Icons:** Lucide React
+- **Build Tool:** Vite
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📦 Getting Started
+1. `npm install`
+2. `npm run dev`
